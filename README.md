@@ -1,4 +1,4 @@
-# Esta aplicación usa CodeIgniter 4 como backend y bootstrap como Front End
+# Aplicación Phonebook.com :: CodeIgniter 4 como backend y bootstrap como Front End
 requiere php 7.4 y mysql cualquier versión estable
 configurar un subdominio phonebook.com para que la aplicación corra sin problemas.
 - adjunto un video mostrando su funcionamiento

@@ -19,9 +19,9 @@
 <body>
 
 	<?php 
-		//echo '<pre>';
-		//var_dump($list);
-		//echo '</pre>';
+		/*echo '<pre>';
+		var_dump($list);
+		echo '</pre>';*/
 	?>
 
 	<p><h1>Phone Book App</h1></p>
@@ -46,8 +46,8 @@
 			echo '<tr>';
 				echo '<td>'.$list[$i]["firstname"].' '.$list[$i]["lastname"].'</td>';
 				echo '<td>'.$list[$i]["phone"].'</td>';
-				echo '<td><button type="button" class="btn btn-info">Edit</button></td>';
-				echo '<td><button type="button" class="btn btn-danger">Delete</button></td>';
+				echo '<td><button id="edit'.$list[$i]["id"].'" type="button" class="btn btn-info edit">Edit</button></td>';
+				echo '<td><button id="del'.$list[$i]["id"].'" type="button" class="btn btn-danger delete">Delete</button></td>';
 			echo '</tr>';
 		}
 		?>

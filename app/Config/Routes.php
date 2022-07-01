@@ -38,6 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->post('/search', 'Home::search');
 $routes->post('/save', 'Home::save');
+$routes->post('/delete', 'Home::delete');
 
 
 /*

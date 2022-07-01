@@ -44,4 +44,25 @@ class Home extends Controller
         
         echo json_encode($msg);
     }
+
+    public function delete(){
+
+        $model = new Model_phone();
+        $msg = array();
+        $data["id"] =trim($_POST["id"]);
+
+        $result = $model->actualizar($data);;
+        
+       if($result == 1){
+            $msg["text"] = "Los datos fueron registrados correctamente.";
+            $msg["resp"] = 100;
+            
+        }
+        else{
+            $msg["resp"] = 10;
+            $msg["text"] = "No se pudo crear la institución educativa.";
+        }
+        
+        echo json_encode($msg);
+    }    
 }

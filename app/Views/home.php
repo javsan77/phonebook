@@ -105,12 +105,30 @@
 				         dataType:"json",
 	                     url: "http://phonebook.com/save",
 			             success:  function (response) {
-			                        console.log(response);
+			                        //console.log(response);
 			                        window.location.href = "http://phonebook.com";
 			             }
 	               });
 
 			});
+
+	    	// Delete Contact
+	    	$('button.delete').click(function(){
+
+	    		let id = this.id.substr(3);
+
+          		$.ajax({ type: "post",
+          			     data:{id:id},
+	                     url: "http://phonebook.com/delete",
+			             success:  function (response) {
+			                        //console.log(response);
+			                        window.location.href = "http://phonebook.com";
+			             }
+	               });
+	          });	    		
+
+
+				    	
 
 	    	$('button#search').click(function(){
 	    		var text = document.getElementById('search_contact').value;

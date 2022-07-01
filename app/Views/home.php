@@ -46,7 +46,7 @@
 			echo '<tr>';
 				echo '<td>'.$list[$i]["firstname"].' '.$list[$i]["lastname"].'</td>';
 				echo '<td>'.$list[$i]["phone"].'</td>';
-				echo '<td><button id="edit'.$list[$i]["id"].'" type="button" class="btn btn-info edit">Edit</button></td>';
+				echo '<td><button id="edit'.$list[$i]["id"].'" type="button" class="btn btn-info edit" data-toggle="modal" data-target="#editModal">Edit</button></td>';
 				echo '<td><button id="del'.$list[$i]["id"].'" type="button" class="btn btn-danger delete">Delete</button></td>';
 			echo '</tr>';
 		}
@@ -82,6 +82,33 @@
 	  </div>
 	</div>	
 
+	<!-- Modal Edit Contact-->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form id="form_edit_contact" name="form_edit_contact">
+	        	<input id="eid" name="eid" type="hidden">
+	        	<input id="efirstname" name="efirstname" class="form-control" type="text" placeholder="Enter first name">
+	        	&nbsp;
+	        	<input id="elastname" name="elastname" class="form-control" type="text" placeholder="Enter last name">
+	        	&nbsp;
+	        	<input id="ephone" name="ephone" class="form-control" type="text" placeholder="Enter telephone number">	        	
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="update_contact" type="button" class="btn btn-primary">Update</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
 
 
 
@@ -115,7 +142,7 @@
 	    	// Delete Contact
 	    	$('button.delete').click(function(){
 
-	    		let id = this.id.substr(3);
+	    		let id = this.id.substr(4);
 
           		$.ajax({ type: "post",
           			     data:{id:id},
@@ -125,9 +152,50 @@
 			                        window.location.href = "http://phonebook.com";
 			             }
 	               });
-	          });	    		
+	        });	    		
 
+	    	// Edit Contact
+	    	$('button.edit').click(function(){
 
+	    		let id = this.id.substr(4);
+
+	    		
+          		$.ajax({ type: "post",
+          			     data:{id:id},
+          			     dataType:"json",
+	                     url: "http://phonebook.com/recover",
+			             success:  function (response) {
+			                        //console.log(typeof(response));
+			                        $('#eid').val(response.id);
+			                        $('#efirstname').val(response.firstname);
+			                        $('#elastname').val(response.lastname);
+			                        $('#ephone').val(response.phone);
+			                        //window.location.href = "http://phonebook.com";
+			             }
+	               });
+	        });
+
+	    	//Update
+	    	$('button#update_contact').click(function(){
+
+	    		var form_contact = document.forms.namedItem("form_edit_contact");  		
+				var formcontact = new FormData(form_contact);
+				$('#editModal').modal('hide');
+				$('#form_edit_contact')[0].reset();
+
+          		$.ajax({ type: "post",
+          			     data:formcontact,
+				         processData: false,
+				         contentType: false,
+				         dataType:"json",
+	                     url: "http://phonebook.com/update",
+			             success:  function (response) {
+			                        //console.log(response);
+			                        window.location.href = "http://phonebook.com";
+			             }
+	               });
+
+			});	    	
 				    	
 
 	    	$('button#search').click(function(){

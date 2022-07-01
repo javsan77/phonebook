@@ -39,6 +39,8 @@ $routes->get('/', 'Home::index');
 $routes->post('/search', 'Home::search');
 $routes->post('/save', 'Home::save');
 $routes->post('/delete', 'Home::delete');
+$routes->post('/recover', 'Home::recover');
+$routes->post('/update', 'Home::update');
 
 
 /*

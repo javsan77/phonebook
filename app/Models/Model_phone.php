@@ -26,11 +26,37 @@ class Model_phone extends Model
         return $this->db->affectedRows();
     }
 
-    public function actualizar($data){
+    public function desactivar($data){
         $id = $data["id"];
 
         $sql = "UPDATE contact 
                 SET activo = 0
+                WHERE id='".$id."'";
+
+        $query=$this->db->query($sql);
+
+        return $this->db->affectedRows();
+    }
+
+    public function recover($id){//echo $id;
+        $sql = "SELECT * FROM contact WHERE activo=1 AND id='".$id."'";
+        $query=$this->db->query($sql);
+        
+        $result = $query->getRow();
+
+        return $result;
+    }
+
+    public function actualizar($data){//var_dump($data);die();
+        $id = $data["id"];
+        $firstname = $data["firstname"];
+        $lastname = $data["lastname"];
+        $phone = $data["phone"];        
+
+        $sql = "UPDATE contact 
+                SET firstname = '".$firstname."', 
+                lastname = '".$lastname."', 
+                phone = '".$phone."'  
                 WHERE id='".$id."'";
 
         $query=$this->db->query($sql);

@@ -142,7 +142,7 @@
 	    	// Delete Contact
 	    	$('button.delete').click(function(){
 
-	    		let id = this.id.substr(4);
+	    		let id = this.id.substr(3);
 
           		$.ajax({ type: "post",
           			     data:{id:id},

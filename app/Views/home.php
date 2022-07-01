@@ -6,6 +6,12 @@
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <title>Untitled Document</title>
 </head>
@@ -25,7 +31,7 @@
 		<tr>
 			<td><p><h2>Contacts</h2></p> </td>
 			<td width="30%"></td>
-			<td><p><button type="button" class="btn btn-primary">+Add Contact</button></p></td>
+			<td><button id="add_contact" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+Add Contact</button></td>
 		</tr>
 		<tr>
 		  
@@ -49,29 +55,74 @@
 	</form>
 
 
-	<!--<p>Tableview (foreach nombre-apellido / numero / boton eliminar)</p>
-	<p>&nbsp;</p>
-	<p>paginador  </p>-->
+	<!-- Modal Add Contact-->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">New Contact</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form id="form_contact" name="form_contact">
+	        	<input id="firstname" name="firstname" class="form-control" type="text" placeholder="Enter first name">
+	        	&nbsp;
+	        	<input id="lastname" name="lastname" class="form-control" type="text" placeholder="Enter last name">
+	        	&nbsp;
+	        	<input id="phone" name="phone" class="form-control" type="text" placeholder="Enter telephone number">	        	
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="save_contact" type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+
+
+
+
+
+
 
 	<script type="text/javascript">
 	  	$(document).ready(function() {
+	  		// Add Contact
+	    	$('button#save_contact').click(function(){
+
+	    		var form_contact = document.forms.namedItem("form_contact");  		
+				var formcontact = new FormData(form_contact);
+				$('#exampleModal').modal('hide');
+				$('#form_contact')[0].reset();
+
+          		$.ajax({ type: "post",
+          			     data:formcontact,
+				         processData: false,
+				         contentType: false,
+				         dataType:"json",
+	                     url: "http://phonebook.com/save",
+			             success:  function (response) {
+			                        console.log(response);
+			                        window.location.href = "http://phonebook.com";
+			             }
+	               });
+
+			});
 
 	    	$('button#search').click(function(){
 	    		var text = document.getElementById('search_contact').value;
-	        	//console.log(text);
 	        	document.getElementById('search_contact').value = '';
-
           		$.ajax({ type: "post",
           			     data:{text:text},
 	                     url: "http://phonebook.com/search",
 			             success:  function (response) {
 			                        console.log(response);
 			             }
-
 	               });
 	          });
-
-	          //alert(response);*/
 
 	    });
 

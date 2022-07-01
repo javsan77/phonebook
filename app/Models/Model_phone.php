@@ -12,4 +12,18 @@ class Model_phone extends Model
 
         return $result;
     }
+
+    public function store($data){
+        $firstname = $data["firstname"];
+        $lastname = $data["lastname"];
+        $phone = $data["phone"];
+
+        $sql = "INSERT INTO contact (firstname, lastname, phone)
+              VALUES ('".$firstname."','".$lastname."','".$phone."')";
+
+        $query=$this->db->query($sql);
+
+        return $this->db->affectedRows();
+    }
+
 }

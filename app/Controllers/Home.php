@@ -20,5 +20,28 @@ class Home extends Controller
 
     }
 
+    public function save(){
 
+        $model = new Model_phone();
+      
+        $msg = array();
+
+        $data["firstname"] =trim($_POST["firstname"]);
+        $data["lastname"] =trim($_POST["lastname"]);
+        $data["phone"] =trim($_POST["phone"]);
+
+        $result = $model->store($data);;
+        
+       if($result == 1){
+            $msg["text"] = "Los datos fueron registrados correctamente.";
+            $msg["resp"] = 100;
+            
+        }
+        else{
+            $msg["resp"] = 10;
+            $msg["text"] = "No se pudo crear la institución educativa.";
+        }
+        
+        echo json_encode($msg);
+    }
 }

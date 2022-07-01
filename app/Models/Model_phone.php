@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 class Model_phone extends Model
 {
     public function Get_All(){
-        $sql = "SELECT * FROM contact WHERE activo=1";
+        $sql = "SELECT * FROM contact WHERE activo=1 ORDER BY id DESC";
         $query=$this->db->query($sql);
         
         $result = $query->getResultArray();

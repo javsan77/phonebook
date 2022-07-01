@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -16,100 +17,107 @@
 <title>Untitled Document</title>
 </head>
 
-<body>
+<body><div class="container-fluid"><div class="row">
 
 	<?php 
 		/*echo '<pre>';
 		var_dump($list);
 		echo '</pre>';*/
 	?>
-
-	<p><h1>Phone Book App</h1></p>
-	<p>&nbsp;</p>
-	<form id="#form1">
-	<table>
-		<tr>
-			<td><p><h2>Contacts</h2></p> </td>
-			<td width="30%"></td>
-			<td><button id="add_contact" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+Add Contact</button></td>
-		</tr>
-		<tr>
-		  
-			<td colspan="3"><input id="search_contact" class="form-control" type="search" placeholder="Search for contact by last name..."></td>
-			<td><button id="search" type="button" class="btn btn-secondary">Search</button></td>
-		</tr>
-		<tr>
-			<td colspan="4">&nbsp;</td>
-		</tr>
-		<?php
-		for ($i=0; $i < count($list); $i++) { 
-			echo '<tr>';
-				echo '<td>'.$list[$i]["firstname"].' '.$list[$i]["lastname"].'</td>';
-				echo '<td>'.$list[$i]["phone"].'</td>';
-				echo '<td><button id="edit'.$list[$i]["id"].'" type="button" class="btn btn-info edit" data-toggle="modal" data-target="#editModal">Edit</button></td>';
-				echo '<td><button id="del'.$list[$i]["id"].'" type="button" class="btn btn-danger delete">Delete</button></td>';
-			echo '</tr>';
-		}
-		?>
-	</table>
-	</form>
-
-
-	<!-- Modal Add Contact-->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">New Contact</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form id="form_contact" name="form_contact">
-	        	<input id="firstname" name="firstname" class="form-control" type="text" placeholder="Enter first name">
-	        	&nbsp;
-	        	<input id="lastname" name="lastname" class="form-control" type="text" placeholder="Enter last name">
-	        	&nbsp;
-	        	<input id="phone" name="phone" class="form-control" type="text" placeholder="Enter telephone number">	        	
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button id="save_contact" type="button" class="btn btn-primary">Save changes</button>
-	      </div>
+	<div class="col-md-3" ></div>
+	<div class="col-md-6 bg-light">
+		<br/>
+		<h1><p style="text-align: center;">Phone Book App</p></h1>
+		<p>&nbsp;</p>
+		<form id="#form1">
+		<div class="table-responsive">
+		<table cclass="table table-responsive">
+			<tr>
+				<td><h2>Contacts</h2></td>
+				<td><button id="add_contact" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">+Add Contact</button></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<!--<tr>			  
+				<td colspan="2"><input id="search_contact" class="form-control" type="search" placeholder="Search for contact by last name..."></td>
+				<td><button id="search" type="button" class="btn btn-secondary">Search</button></td>
+				<td></td>
+			</tr>-->
+			<tr>
+				<td colspan="4">&nbsp;</td>
+			</tr>
+			<?php
+			for ($i=0; $i < count($list); $i++) { 
+				echo '<tr>';
+					echo '<td>'.$list[$i]["firstname"].' '.$list[$i]["lastname"].'</td>';
+					echo '<td>'.$list[$i]["phone"].'</td>';
+					echo '<td><button id="edit'.$list[$i]["id"].'" type="button" class="btn btn-info edit" data-toggle="modal" data-target="#editModal">Edit</button></td>';
+					echo '<td><button id="del'.$list[$i]["id"].'" type="button" class="btn btn-danger delete">Delete</button></td>';
+				echo '</tr>';
+			}
+			?>
+		</table>
 	    </div>
-	  </div>
-	</div>	
+		</form>
 
-	<!-- Modal Edit Contact-->
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <form id="form_edit_contact" name="form_edit_contact">
-	        	<input id="eid" name="eid" type="hidden">
-	        	<input id="efirstname" name="efirstname" class="form-control" type="text" placeholder="Enter first name">
-	        	&nbsp;
-	        	<input id="elastname" name="elastname" class="form-control" type="text" placeholder="Enter last name">
-	        	&nbsp;
-	        	<input id="ephone" name="ephone" class="form-control" type="text" placeholder="Enter telephone number">	        	
-	        </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button id="update_contact" type="button" class="btn btn-primary">Update</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>	
 
+		<!-- Modal Add Contact-->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">New Contact</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form id="form_contact" name="form_contact">
+		        	<input id="firstname" name="firstname" class="form-control" type="text" placeholder="Enter first name">
+		        	&nbsp;
+		        	<input id="lastname" name="lastname" class="form-control" type="text" placeholder="Enter last name">
+		        	&nbsp;
+		        	<input id="phone" name="phone" class="form-control" type="text" placeholder="Enter telephone number">	        	
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button id="save_contact" type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+
+		<!-- Modal Edit Contact-->
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form id="form_edit_contact" name="form_edit_contact">
+		        	<input id="eid" name="eid" type="hidden">
+		        	<input id="efirstname" name="efirstname" class="form-control" type="text" placeholder="Enter first name">
+		        	&nbsp;
+		        	<input id="elastname" name="elastname" class="form-control" type="text" placeholder="Enter last name">
+		        	&nbsp;
+		        	<input id="ephone" name="ephone" class="form-control" type="text" placeholder="Enter telephone number">	        	
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button id="update_contact" type="button" class="btn btn-primary">Update</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
+	</div>
+	<div>
+    <div class="col-md-3" style="border: 1px solid green"></div>
 
 
 
@@ -215,6 +223,6 @@
 
 
 	</script>
-
+</div></div>
 </body>
 </html>
